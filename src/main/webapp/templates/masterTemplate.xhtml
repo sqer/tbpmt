@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="style" name="custom.css"></h:outputStylesheet>
+	<h:outputScript library="js" name="main.js"></h:outputScript>
+	<ui:insert name="script" />
+
+</h:head>
+<h:body>
+	<div class="header" id="header">
+		<h:graphicImage library="img" name="logo.png" styleClass="logo"
+			onclick="window.location='./dashboard.xhtml'" />
+	</div>
+	<!-- Menu bar file -->
+	<h:panelGroup styleClass="menu">
+		<ui:include src="/templates/navigation.xhtml" />
+	</h:panelGroup>
+
+	<ui:insert name="messages" />
+
+	<!-- busy indicator -->
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<table>
+			<tr>
+				<td>
+					<p:graphicImage library="img" name="loading_spinner.gif" />
+				</td>
+				<td class="v-middle">
+					<h:outputLabel value="#{msg.lbl_loading_spinner}" />
+				</td>
+			</tr>
+		</table>
+
+
+	</p:dialog>
+
+
+	<!-- page content -->
+	<div class="content">
+		<ui:insert name="content" />
+	</div>
+	<div>
+		<ui:insert name="dialogs" />
+	</div>
+
+</h:body>
+</html>

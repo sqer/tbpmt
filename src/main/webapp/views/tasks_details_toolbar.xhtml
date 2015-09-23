@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tbpmt="http://java.sun.com/jsf/composite/tbpmt"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition >
+	<p:toolbar>
+		<f:facet name="left">
+			<!-- LOAD ENUM -->
+			<o:importConstants type="pl.sqer.dto.resolution.ResolutionEnum"
+				var="ResolutionEnum" />
+			<!-- Maintain task -->
+			<p:splitButton value="#{msg.lbl_tasks_details_toolbar_save}"
+				update="@form" process="@form" action="#{taskDetails.save}"
+				icon="ui-icon-disk">
+				<p:menuitem value="#{msg.lbl_tasks_details_toolbar_save_as_new}"
+					update="@form" process="@form" rendered="#{not newItem}"
+					actionListener="#{taskDetails.saveAsNew}" icon="ui-icon-disk" />
+				<p:menuitem value="#{msg.lbl_tasks_details_toolbar_delete}"
+					immediate="true" update="@form" process="@form"
+					rendered="#{not newItem}" action="#{taskDetails.delete}"
+					icon="ui-icon-trash" />
+			</p:splitButton>
+			<!-- Resolve task - resolution types -->
+			<p:splitButton rendered="#{not taskDetails.resolved and not newItem}"
+				value="#{msg.lbl_tasks_details_toolbar_resolved}" update="@form"
+				process="@form" immediate="true"
+				actionListener="#{taskDetails.changeResolution(ResolutionEnum.RESOLVED)}">
+				<p:menuitem value="#{msg.lbl_tasks_details_toolbar_fixed}"
+					update="@form" process="@form" immediate="true"
+					actionListener="#{taskDetails.changeResolution(ResolutionEnum.FIXED)}"
+					icon="ui-icon-triangle-1-s" />
+				<p:menuitem value="#{msg.lbl_tasks_details_toolbar_duplicate}"
+					update="@form" process="@form" immediate="true"
+					actionListener="#{taskDetails.changeResolution(ResolutionEnum.DUPLICATE)}"
+					icon="ui-icon-triangle-1-s" />
+				<p:menuitem value="#{msg.lbl_tasks_details_toolbar_wont_fix}"
+					update="@form" process="@form" immediate="true"
+					actionListener="#{taskDetails.changeResolution(ResolutionEnum.WONT_FIX)}"
+					icon="ui-icon-triangle-1-s" />
+				<p:menuitem value="#{msg.lbl_tasks_details_toolbar_incomplete}"
+					update="@form" process="@form" immediate="true"
+					actionListener="#{taskDetails.changeResolution(ResolutionEnum.INCOMPLETE)}"
+					icon="ui-icon-triangle-1-s" />
+				<p:menuitem
+					value="#{msg.lbl_tasks_details_toolbar_cannot_reproduce}"
+					update="@form" process="@form" immediate="true"
+					actionListener="#{taskDetails.changeResolution(ResolutionEnum.CANNOT_REPRODUCE)}"
+					icon="ui-icon-triangle-1-s" />
+				<p:menuitem value="#{msg.lbl_tasks_details_toolbar_works_fine}"
+					update="@form" process="@form" immediate="true"
+					actionListener="#{taskDetails.changeResolution(ResolutionEnum.WORKS_FINE)}"
+					icon="ui-icon-triangle-1-s" />
+			</p:splitButton>
+		</f:facet>
+
+		<f:facet name="right">
+			<!-- start progress of task -->
+			<p:commandButton
+				rendered="#{not taskDetails.resolved and not newItem}"
+				update="@form" process="@form" immediate="true"
+				actionListener="#{taskDetails.changeResolution(ResolutionEnum.IN_PROGRESS)}"
+				value="#{msg.lbl_tasks_details_toolbar_start_progress}" />
+			<!-- Open resolved task -->
+			<p:commandButton rendered="#{taskDetails.resolved and not newItem}"
+				update="@form" process="@form" immediate="true"
+				actionListener="#{taskDetails.open()}"
+				value="#{taskDetails.inProgress ? msg.lbl_tasks_details_toolbar_stop_progress : msg.lbl_tasks_details_toolbar_open}" />
+			<!-- estimate -->
+			<p:commandButton type="button"
+				rendered="#{not taskDetails.resolved and not newItem}"
+				onclick="PF('estimateDialogVar').show();" immediate="true"
+				value="#{msg.lbl_tasks_details_toolbar_estimate}" />
+			<!-- log work -->
+			<p:commandButton type="button"
+				rendered="#{not taskDetails.resolved and not newItem}"
+				onclick="PF('reportWorkDialogVar').show();" immediate="true"
+				value="#{msg.lbl_tasks_details_toolbar_log_work}" />
+		</f:facet>
+	</p:toolbar>
+</ui:composition>
+</html>

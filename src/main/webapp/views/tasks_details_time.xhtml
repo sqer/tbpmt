@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tbpmt="http://java.sun.com/jsf/composite/tbpmt"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<table class="defaultTableLayout" cellspacing="0" cellpadding="10">
+		<tbody>
+			<tr>
+				<td class="label"><h:graphicImage library="img"
+						name="estimated_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_details_estimated_time}:" /></td>
+				<td class="value textAlignMiddle"><h:outputText
+						value="#{taskDetails.estimatedTime}" id="estimatedTime" /></td>
+			</tr>
+			<tr>
+				<td class="label"><h:graphicImage library="img"
+						name="logged_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_details_logged_time}:" /></td>
+				<td class="value textAlignMiddle"><h:outputText
+						value="#{taskDetails.loggedTime}" id="loggedTime" /></td>
+			</tr>
+			<tr>
+				<td class="label"><h:graphicImage library="img"
+						name="remaining_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_details_remaining_time}:" /></td>
+				<td class="value textAlignMiddle"><h:outputText
+						id="remainingTime" value="#{taskDetails.remainingTime}" /></td>
+			</tr>
+		</tbody>
+	</table>
+</ui:composition>
+</html>

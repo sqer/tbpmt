@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tbpmt="http://java.sun.com/jsf/composite/tbpmt"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/masterTemplate.xhtml">
+
+
+	<ui:define name="content">
+		<h:form id="account">
+			<p:growl for="account" showDetail="false" />
+			<p:panel styleClass="contentPanel" header="#{msg.lbl_my_account_user_data}">
+				<p:toolbar styleClass="contentToolbar">
+					<f:facet name="left">
+						<p:commandButton value="#{msg.lbl_tasks_details_toolbar_save}"
+							update="@form" process="@form" actionListener="#{identity.save}"
+							icon="ui-icon-disk" />
+					</f:facet>
+				</p:toolbar>
+				<table class="defaultTableLayout" cellspacing="0" cellpadding="10">
+					<tbody>
+						<tr>
+							<td class="label"><h:outputLabel
+									value="#{msg.lbl_my_account_username}:" /></td>
+							<td class="value"><h:outputText
+									value="#{identity.user.username}" /></td>
+							<td class="label"><h:outputLabel
+									value="#{msg.lbl_my_account_password}" /></td>
+							<td class="value"><p:password id="password" required="true"
+									requiredMessage="#{msg.lbl_field_required}"
+									value="#{identity.user.password}" redisplay="true" /></td>
+							<td class="label"><h:outputLabel
+									value="#{msg.lbl_my_account_email}:" /></td>
+							<td class="value"><p:inputText
+									value="#{identity.user.email}" required="true"
+									requiredMessage="#{msg.lbl_field_required}" /></td>
+						</tr>
+						<tr>
+							<td class="label"></td>
+							<td class="value"></td>
+							<td class="label"></td>
+							<td class="value"><p:message for="account:password" /></td>
+							<td class="label"></td>
+							<td class="value"></td>
+						</tr>
+						<tr>
+							<td class="label"><h:outputLabel
+									value="#{msg.lbl_my_account_name}:" /></td>
+							<td class="value"><h:outputText
+									value="#{identity.user.name}" /></td>
+							<td class="label"><h:outputLabel
+									value="#{msg.lbl_my_account_surename}:" /></td>
+							<td class="value"><h:outputText
+									value="#{identity.user.surename}" /></td>
+							<td class="label"><h:graphicImage library="img"
+									name="date_24.png" styleClass="labelImg" /> <h:outputLabel
+									value="#{msg.lbl_my_account_date_of_birth}:" /></td>
+							<td class="value"><tbpmt:dateOutputText
+									value="#{identity.user.dateOfBirth}" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

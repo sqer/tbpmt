@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tbpmt="http://java.sun.com/jsf/composite/tbpmt"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/masterTemplate.xhtml">
+	<ui:param name="displayRightContent" value="true" />
+	<ui:param name="edited" value="#{userDetails.edited}"></ui:param>
+	<ui:param name="newItem" value="#{edited.id==null}"></ui:param>
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{userDetails.userId}" />
+		<f:event type="preRenderView" listener="#{userDetails.init()}" />
+	</f:metadata>
+
+	<ui:define name="content">
+		<h:form id="userDetails">
+			<p:growl id="msg" showDetail="false" />
+			<p:panel styleClass="contentPanel" header="#{msg.lbl_my_account_user_data}">
+				<p:toolbar styleClass="contentToolbar">
+					<f:facet name="left">
+						<p:splitButton value="#{msg.lbl_user_details_toolbar_save}"
+							update="@form" process="@form"
+							actionListener="#{userDetails.save}" icon="ui-icon-disk">
+							<p:menuitem value="#{msg.lbl_user_details_toolbar_save_as_new}"
+								update="@form" process="@form" rendered="#{not newItem}"
+								actionListener="#{userDetails.saveAsNew}" icon="ui-icon-disk" />
+							<p:menuitem value="#{msg.lbl_user_details_toolbar_delete}"
+								update="@form" process="@form" rendered="#{not newItem}"
+								actionListener="#{userDetails.delete}" icon="ui-icon-trash" />
+						</p:splitButton>
+					</f:facet>
+				</p:toolbar>
+				<ui:include src="/views/users_details_data.xhtml" />
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

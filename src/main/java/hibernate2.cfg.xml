@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+ 
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<property name="dialect">pl.sqer.dto.common.SQLiteDialect</property>
+		<property name="connection.driver_class">org.sqlite.JDBC</property>
+		<property name="connection.url">jdbc:sqlite:/home/tomasz/workspace/tbpmt-sqllte.db</property>
+		<property name="connection.username"></property>
+		<property name="connection.password"></property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.cache.use_query_cache">
+			true
+		</property>
+		<property name="cache.provider_class">
+			org.hibernate.cache.EhCacheProvider
+		</property>
+		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+		<!-- Mapping with model class containing annotations -->
+		<mapping class="pl.sqer.dao.entity.task.TaskEntity" />
+		<mapping class="pl.sqer.dao.entity.user.UserEntity" />
+		<mapping class="pl.sqer.dao.entity.type.TypeEntity" />
+		<mapping class="pl.sqer.dao.entity.priority.PriorityEntity" />
+		<mapping class="pl.sqer.dao.entity.resolution.ResolutionEntity" />
+	</session-factory>
+
+</hibernate-configuration>

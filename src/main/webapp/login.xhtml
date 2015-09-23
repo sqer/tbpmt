@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/masterTemplate.xhtml">
+	<ui:define name="content">
+		<h:form id="loginForm" styleClass="loginForm">
+			<p:growl id="msg" showDetail="false" life="3000" globalOnly="true" />
+			<p:panel header="#{msg.lbl_login_form_title}" style="width: 360px;">
+
+				<h:panelGrid id="loginPanel" columns="2" columnClasses="label,value">
+
+					<h:outputText value="#{msg.lbl_login_username}" />
+
+					<p:inputText id="username" value="#{loginController.uname}" style="width: 200px;"
+						required="true" requiredMessage="#{msg.lbl_field_required}"></p:inputText>
+
+					<p:spacer></p:spacer>
+
+					<p:message for="username"></p:message>
+
+					<h:outputText value="#{msg.lbl_login_password}" />
+
+					<p:password id="password" value="#{loginController.password}" style="width: 200px;"
+						required="true" requiredMessage="#{msg.lbl_field_required}"
+						feedback="false"></p:password>
+
+					<p:spacer></p:spacer>
+
+					<p:message for="password"></p:message>
+
+					<p:spacer></p:spacer>
+
+					<p:commandButton action="#{loginController.loginProject}" id="login"
+						value="#{msg.lbl_login_log_in}" update="loginForm" ajax="true"></p:commandButton>
+
+				</h:panelGrid>
+
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+
+</html>

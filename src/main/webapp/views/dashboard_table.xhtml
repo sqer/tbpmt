@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:form id="taskDatatable">
+		<p:growl id="msg" showDetail="true" life="3000" for="taskDatatable" />
+		<p:dataTable id="singleDT" var="item" value="#{dashboard.list}"
+			rows="5" selectionMode="single" selection="#{dashboard.selected}"
+			paginator="true" paginatorAlwaysVisible="true"
+			paginatorPosition="bottom" rowKey="#{item.id}">
+			<p:column headerText="#{msg.lbl_dashboard_table_task_type}">
+				<h:graphicImage library="img/type" name="#{item.type.icon}"
+					styleClass="labelImg" />
+				<h:outputText value="#{item.type.name}" />
+			</p:column>
+			<p:column headerText="#{msg.lbl_dashboard_table_task_priority}">
+				<h:graphicImage library="img/priority" name="#{item.priority.icon}"
+					styleClass="labelImg" />
+				<h:outputText value="#{item.priority.name}" />
+			</p:column>
+			<p:column headerText="#{msg.lbl_dashboard_table_task_resolution}">
+				<h:outputText value="#{item.resolution.name}" />
+			</p:column>
+			<p:column headerText="#{msg.lbl_dashboard_table_task_title}">
+				<h:outputText value="#{item.title}" />
+			</p:column>
+			<f:facet name="footer">
+				<p:commandButton process="singleDT" icon="ui-icon-search"
+					value="#{msg.lbl_dashboard_table_view}" update="@form" ajax="true"
+					action="#{dashboard.gotToEdit()}" />
+			</f:facet>
+		</p:dataTable>
+	</h:form>
+</ui:composition>
+</html>

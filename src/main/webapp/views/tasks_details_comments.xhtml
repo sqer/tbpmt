@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:dataTable value="#{taskDetails.edited.comments}" var="item"
+		id="commentsTable" styleClass="maxWidth">
+		<h:column>
+			<p:panel styleClass="maxWidth">
+				<f:facet name="header">
+     					 #{msg.lbl_tasks_details_comment_user} #{item.creator.username} <div
+						style='float: right'>
+						#{msg.lbl_tasks_details_comment_time}
+						#{dateConverter.convertToString(item.creationDate,true)}
+						<p:commandButton icon="ui-icon-circle-close" process="@this" style="margin-left:10px;"
+							update=":taskDetails:taskTabs" rendered="#{tasksRoleManager.canDeleteComment(item)}"
+							action="#{taskDetails.deleteComment(item)}" />
+					</div>
+				</f:facet>
+				<h:outputText escape="false" value="#{item.content}" />
+			</p:panel>
+		</h:column>
+	</h:dataTable>
+	<p:panel id="commentArea" styleClass="maxWidth">
+		<f:facet name="header">
+			<div style='float: left'>#{msg.lbl_tasks_details_comment_new_header}</div>
+			<div style='float: right'>
+				<p:commandButton action="#{taskDetails.addComment}"
+					update=":taskDetails:msg :taskDetails:taskTabs:commentsTable :taskDetails:taskTabs:commentArea"
+					process=":taskDetails:taskTabs:commentArea"
+					value="#{msg.lbl_tasks_details_comment_add}">
+				</p:commandButton>
+				<p:commandButton type="button"
+					onclick="PF('commentEditorVar').clear();"
+					actionListener="#{taskDetails.clearComment}"
+					value="#{msg.lbl_tasks_details_comment_clear}" />
+			</div>
+		</f:facet>
+		<p:editor widgetVar="commentEditorVar" value="#{taskDetails.comment}" />
+	</p:panel>
+</ui:composition>
+</html>

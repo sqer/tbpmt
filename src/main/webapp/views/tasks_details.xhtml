@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tbpmt="http://java.sun.com/jsf/composite/tbpmt"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/masterTemplate.xhtml">
+	<ui:param name="edited" value="#{taskDetails.edited}"></ui:param>
+	<ui:param name="newItem" value="#{edited.id==null}"></ui:param>
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{taskDetails.taskId}" />
+		<f:event type="preRenderView" listener="#{taskDetails.init()}" />
+	</f:metadata>
+
+	<ui:define name="content">
+		<table>
+			<tbody>
+				<tr>
+					<td class="leftContent"><h:form id="taskDetails">
+							<p:growl id="msg" showDetail="false" life="3000" />
+							<p:panel styleClass="contentPanel"
+								header="#{msg.lbl_tasks_details_content_header}">
+								<ui:include src="/views/tasks_details_toolbar.xhtml"></ui:include>
+								<ui:include src="/views/tasks_details_main_data.xhtml"></ui:include>
+								<ui:fragment rendered="#{not newItem}">
+									<ui:include src="/views/tasks_details_tabs.xhtml"></ui:include>
+								</ui:fragment>
+							</p:panel>
+						</h:form></td>
+					<td class="rightContent top">
+						<div>
+							<ui:include src="/views/tasks_details_time.xhtml"></ui:include>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</ui:define>
+	<ui:define name="dialogs">
+		<!-- report work dialog -->
+		<ui:include src="/views/tasks_details_report_work_dialog.xhtml" />
+		<!-- estimate dialog -->
+		<ui:include src="/views/tasks_details_estimate_dialog.xhtml" />
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:tbpmt="http://java.sun.com/jsf/composite/tbpmt"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:form id="usersDatatable">
+		<p:growl id="msg" showDetail="false" life="3000" for="usersDatatable" />
+		<p:dataTable id="singleDT" var="item" value="#{users.list}"
+			selectionMode="single" selection="#{users.selected}"
+			rowKey="#{item.id}">
+			<p:ajax event="rowSelect" update="@form" process="@form" />
+			<p:ajax event="rowUnselect" update="@form" process="@form" />
+			<p:column headerText="#{msg.lbl_users_username}"
+				sortBy="#{item.username}" filterBy="#{item.username}"
+				filterMatchMode="contains">
+				<h:outputText value="#{item.username}" />
+			</p:column>
+			<p:column headerText="#{msg.lbl_users_name}" sortBy="#{item.name}"
+				filterBy="#{item.name}" filterMatchMode="contains">
+				<h:outputText value="#{item.name}" />
+			</p:column>
+			<p:column headerText="#{msg.lbl_users_surename}"
+				sortBy="#{item.surename}" filterBy="#{item.surename}"
+				filterMatchMode="contains">
+				<h:outputText value="#{item.surename}" />
+			</p:column>
+			<p:column headerText="#{msg.lbl_users_date_of_birth}"
+				sortBy="#{dateConverter.convertToString(item.dateOfBirth,false)}"
+				filterBy="#{dateConverter.convertToString(item.dateOfBirth,false)}"
+				filterMatchMode="contains">
+				<tbpmt:dateOutputText value="#{item.dateOfBirth}" />
+			</p:column>
+			<p:column headerText="#{msg.lbl_users_email}" sortBy="#{item.email}"
+				filterBy="#{item.email}" filterMatchMode="contains">
+				<h:outputText value="#{item.email}" />
+			</p:column>
+			<f:facet name="footer">
+				<p:commandButton process="singleDT" icon="ui-icon-search"
+					value="#{msg.lbl_users_table_edit}" update="@form" ajax="true"
+					action="#{users.gotToEdit()}" />
+			</f:facet>
+		</p:dataTable>
+	</h:form>
+</ui:composition>
+</html>

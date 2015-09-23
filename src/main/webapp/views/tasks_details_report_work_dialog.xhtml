@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions" 
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tbpmt="http://java.sun.com/jsf/composite/tbpmt"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:form id="reportWorkForm">
+		<p:dialog widgetVar="reportWorkDialogVar" id="reportWorkDialog"
+			resizable="false"
+			header="#{msg.lbl_tasks_details_work_report_dialog_header}">
+			<table class="defaultTableLayout" cellspacing="0" cellpadding="10">
+				<tbody>
+					<tr>
+						<td class="dialogLabel"><h:outputLabel
+								value="#{msg.lbl_tasks_details_work_report_dialog_time}" /></td>
+						<td class="value"><pe:inputNumber id="time" decimalPlaces="2"
+								value="#{taskDetails.time}" required="true"
+								requiredMessage="#{msg.lbl_field_required}" />
+							<p:message id="timeMessage" for="reportWorkForm:time" /></td>
+					</tr>
+					<tr>
+						<td class="dialogLabel"><h:outputLabel
+								value="#{msg.lbl_tasks_details_work_report_dialog_date}" /></td>
+						<td class="value"><p:calendar id="date"
+								value="#{taskDetails.date}" required="true"
+								requiredMessage="#{msg.lbl_field_required}"
+								locale="#{localeBean.locale}"
+								pattern="#{localeBean.defaultDateFormat}" />
+							<p:message id="dateMessage" for="reportWorkForm:date" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><h:panelGroup styleClass="dialogButtons">
+								<p:commandButton style="margin-right:5px;"
+									oncomplete="if(!args.validationFailed){PF('reportWorkDialogVar').hide(); clearField('#reportWorkForm\\:time'); clearField('reportWorkForm\\:date');}"
+									update=":loggedTime :remainingTime :reportWorkForm:timeMessage :reportWorkForm:dateMessage :taskDetails:taskTabs:reportedWorkTable"
+									value="#{msg.lbl_ok}" process="@form"
+									actionListener="#{taskDetails.reportWork()}">
+								</p:commandButton>
+								<p:commandButton immediate="true"
+									value="#{msg.lbl_cancel}" 
+									actionListener="#{taskDetails.clearReportWorkDialog()}"
+									onclick="PF('reportWorkDialogVar').hide(); clearField('#reportWorkForm\\:time'); clearField('reportWorkForm\\:date');" />
+							</h:panelGroup></td>
+					</tr>
+				</tbody>
+			</table>
+		</p:dialog>
+	</h:form>
+</ui:composition>
+</html>

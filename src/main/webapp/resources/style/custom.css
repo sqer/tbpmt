@@ -1,0 +1,240 @@
+html, body {
+	margin: 10px;
+	width: 100;
+	font-size: 11px;
+}
+
+.content {
+	padding: 15px;
+	border: 1px solid #ccc;
+	height: 100%;
+}
+
+.toolbar {
+	margin-bottom: 10px;
+}
+
+.boxSizing {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+.centerText {
+	text-align: center;
+}
+
+.tableBorder {
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: rgb(204, 204, 204);
+	border-collapse: separate;
+	background-color:;
+}
+
+.tableBorder th {
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	-moz-border-radius:;
+}
+
+.tableBorder td {
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	-moz-border-radius:;
+}
+
+.loginForm {
+	/* centerized */
+	display: table;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
+}
+
+.label {
+	vertical-align: top;
+	width: 140px;
+	font-weight: bold;
+	padding-right: 5px;
+}
+
+.dialogLabel {
+	vertical-align: top;
+	font-weight: bold;
+	padding-right: 5px;
+}
+
+.dialogButtons {
+	float: right;
+}
+
+.value {
+	vertical-align: top;
+	padding-right: 10px;
+	text-align: left;
+}
+
+.labelImg {
+	padding-right: 5px;
+	vertical-align: middle;
+}
+
+.maxWidth {
+	width: 100%;
+}
+
+.header {
+	height: 100px;
+	border: 1px solid #ccc;
+}
+
+.menu {
+	width: 100%;
+}
+
+.defaultSelectItem {
+	min-width: 200px;
+}
+
+.defaultTableLayout {
+	
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.agileColumn {
+	min-width: 33% !important;
+	width: 33% !important;
+	max-width: 33% !important;
+}
+
+.logo {
+	height: 100px;
+	cursor: pointer;
+}
+
+.userListBox {
+	width: 222px !important;
+	height: 95px !important;
+}
+
+.roleButtonPadding {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.buttonArrowLeft {
+	background: url("#{resource['img/arrow_left_16.png']}") !important;
+}
+
+.buttonArrowRight {
+	background: url("#{resource['img/arrow_right_16.png']}") !important;
+}
+
+.v-middle {
+	vertical-align: middle;
+}
+
+.ui-dashboard-column {
+	padding-bottom: 5px !important;
+}
+
+.leftContent {
+	width: 85%;
+	padding-right: 10px;
+}
+
+.rightContent {
+	border-left: 1px solid #ccc;
+	right: 15%;
+}
+
+.textAlignMiddle {
+	vertical-align: middle;
+}
+
+.contentPanel .ui-panel-content {
+	padding: 0px !important;
+}
+
+.contentToolbar {
+	margin-bottom: 10px;
+}
+
+.top {
+	vertical-align: top;
+}
+
+.homeGallery h1, .homeGallery h2 {
+	font-size: 40px;
+	line-height: 52px;
+	color: #000;
+}
+
+.homeGallery {
+	padding: 10px 10px 0;
+	background-color: white;
+	position: relative;
+	overflow: auto;
+	background-repeat: no-repeat;
+}
+
+.homeGallery li {
+	list-style: none;
+}
+
+.homeImageOne {
+	background-image: url("#{resource['img:homeImageOne.png']}");
+	height: 375px;
+	width: 600px; background-size : auto;
+	background-repeat: no-repeat;
+	background-size: auto
+}
+
+.homeImageTwo {
+	background-image: url("#{resource['img:homeImageTwo.png']}");
+	height: 375px;
+	width: 200px;
+	background-size: auto;
+	background-repeat: no-repeat;
+}
+
+.homeImageThree {
+	background-image: url("#{resource['img:homeImageThree.png']}");
+	height: 375px;
+	width: 200px;
+	background-size: auto%;
+	background-repeat: no-repeat;
+}
+
+.homeGallery ul li {
+	float: left;
+}
+.infoFieldset {
+	-webkit-box-shadow: 0 0 15px #AAAAAA;
+    -moz-box-shadow: 0 0 15px #AAAAAA;
+    box-shadow: 0 0 15px #AAAAAA;
+}
+.infoFieldset legend {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.infoTextColumn{
+	text-align: justify;
+    text-justify: inter-word;
+	padding-right:20px;
+}
+
+.infoText {
+	font-size: 20px;
+}

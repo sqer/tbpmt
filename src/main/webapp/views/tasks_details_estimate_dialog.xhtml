@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tbpmt="http://java.sun.com/jsf/composite/tbpmt"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:form id="estimateWorkForm">
+		<p:dialog widgetVar="estimateDialogVar" id="estimateWorkDialog"
+			resizable="false"
+			header="#{msg.lbl_tasks_details_estimate_dialog_header}">
+			<table class="defaultTableLayout" cellspacing="0" cellpadding="10">
+				<tbody>
+					<tr>
+						<td class="dialogLabel"><h:outputLabel
+								value="#{msg.lbl_tasks_details_work_report_dialog_time}" /></td>
+						<td class="value"><pe:inputNumber id="time" decimalPlaces="2"
+								value="#{taskDetails.estimation}" required="true"
+								requiredMessage="#{msg.lbl_field_required}" /> <p:message
+								id="timeMessage" for="estimateWorkForm:time" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><h:panelGroup styleClass="dialogButtons">
+								<p:commandButton style="margin-right:5px;"
+									oncomplete="if (!args.validationFailed){PF('estimateDialogVar').hide(); clearField('#estimateWorkForm\\:time');}"
+									update=":remainingTime :estimatedTime :estimateWorkForm:timeMessage"
+									value="#{msg.lbl_ok}" process="@form"
+									actionListener="#{taskDetails.saveEstimation()}">
+								</p:commandButton>
+								<p:commandButton immediate="true"
+									value="#{msg.lbl_cancel}" 
+									actionListener="#{taskDetails.clearEstimateDialog()}"
+									onclick="PF('estimateDialogVar').hide(); clearField('#estimateWorkForm\\:time\\:time');" />
+							</h:panelGroup></td>
+					</tr>
+				</tbody>
+			</table>
+		</p:dialog>
+	</h:form>
+</ui:composition>
+</html>

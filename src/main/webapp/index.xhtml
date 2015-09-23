@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/masterTemplate.xhtml">
+	<ui:define name="script">
+		<h:outputScript library="js" name="unslider.min.js" />
+		<script>
+
+	        $(function() {
+	            $('.homeGallery').unslider({dots: true});
+	        });
+		</script>
+	</ui:define>
+	<ui:define name="content">
+		<table>
+			<tbody>
+				<tr>
+					<td class="infoTextColumn"><h:outputText
+							value="#{msg.lbl_home_info}" escape="false" styleClass="infoText" />
+					</td>
+					<td>
+						<fieldset class="infoFieldset">
+							<legend>#{msg.lbl_powered_by}</legend>
+
+							<div class="homeGallery">
+								<ul>
+									<li class="homeImageOne"></li>
+									<li class="homeImageTwo"></li>
+									<li class="homeImageThree"></li>
+								</ul>
+							</div>
+						</fieldset>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</ui:define>
+</ui:composition>
+</html>

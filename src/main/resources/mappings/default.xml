@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping wildcard="true">
+		<class-a>pl.sqer.dao.entity.task.TaskEntity</class-a>
+		<class-b>pl.sqer.dto.tasks.TaskDto</class-b>
+
+	</mapping>
+
+	<mapping wildcard="true" map-id="selectAllTasks">
+		<class-a>pl.sqer.dao.entity.task.TaskEntity</class-a>
+		<class-b>pl.sqer.dto.tasks.TaskDto</class-b>
+		<field-exclude>
+			<a>estimated</a>
+			<b>estimated</b>
+		</field-exclude>
+		<field-exclude>
+			<a>taskTimes</a>
+			<b>taskTimes</b>
+		</field-exclude>
+		<field-exclude>
+			<a>comments</a>
+			<b>comments</b>
+		</field-exclude>
+	</mapping>
+
+
+
+	<mapping wildcard="true">
+		<class-a>pl.sqer.dao.entity.user.UserEntity</class-a>
+		<class-b>pl.sqer.dto.users.UserDto</class-b>
+
+	</mapping>
+
+
+	<mapping wildcard="true">
+		<class-a>pl.sqer.dao.entity.priority.PriorityEntity</class-a>
+		<class-b>pl.sqer.dto.priority.PriorityDto</class-b>
+
+	</mapping>
+
+	<mapping wildcard="true">
+		<class-a>pl.sqer.dao.entity.type.TypeEntity</class-a>
+		<class-b>pl.sqer.dto.type.TypeDto</class-b>
+
+	</mapping>
+
+
+</mappings> 

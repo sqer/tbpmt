@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/masterTemplate.xhtml">
+	<ui:define name="header">
+		<h1>Users</h1>
+	</ui:define>
+	<ui:define name="content">
+		<p:panel header="#{msg.lbl_agile_content_header}"
+			styleClass="contentPanel">
+			<h:form id="agileForm">
+				<table class="maxWidth tableBorder">
+					<tr>
+						<td class="bold agileColumn centerText">#{msg.lbl_agile_th_to_do}</td>
+						<td class="bold agileColumn centerText">#{msg.lbl_agile_th_in_progress}</td>
+						<td class="bold agileColumn centerText">#{msg.lbl_agile_th_done}</td>
+					</tr>
+					<tr>
+						<td class="agileColumn"><ui:repeat var="item" value="#{agile.toDoList}">
+								<ui:include src="/views/agile_task.xhtml">
+									<ui:param name="item" value="#{item}" />
+								</ui:include>
+							</ui:repeat></td>
+						<td class="agileColumn"><ui:repeat var="item" value="#{agile.inProgressList}">
+								<ui:include src="/views/agile_task.xhtml">
+									<ui:param name="item" value="#{item}" />
+								</ui:include>
+							</ui:repeat></td>
+						<td class="agileColumn"><ui:repeat var="item" value="#{agile.doneList}">
+								<ui:include src="/views/agile_task.xhtml">
+									<ui:param name="item" value="#{item}" />
+								</ui:include>
+							</ui:repeat></td>
+					</tr>
+				</table>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<table class="defaultTableLayout" cellspacing="0" cellpadding="10">
+		<tbody>
+			<tr>
+				<td class="label"><h:graphicImage library="img"
+						name="user_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_user_details_username}:" /></td>
+				<td class="value"><p:inputText value="#{edited.username}" /></td>
+				<td class="label"><h:outputLabel
+						value="#{msg.lbl_user_details_email}:" /></td>
+				<td class="value"><p:inputText value="#{edited.email}" /></td>
+				<td class="label"></td>
+				<td class="value"></td>
+			</tr>
+			<tr>
+				<td class="label"><h:outputLabel
+						value="#{msg.lbl_user_details_name}:" /></td>
+				<td class="value"><p:inputText value="#{edited.name}" /></td>
+				<td class="label"><h:outputLabel
+						value="#{msg.lbl_user_details_surename}:" /></td>
+				<td class="value"><p:inputText value="#{edited.surename}" /></td>
+				<td class="label"><h:graphicImage library="img"
+						name="date_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_user_details_date_of_birth}:" /></td>
+				<td class="value"><p:calendar id="popup"
+						value="#{edited.dateOfBirth}" locale="#{localeBean.locale}"
+						pattern="#{localeBean.defaultDateFormat}" /></td>
+			</tr>
+			<tr>
+				<td class="bold"><h:graphicImage library="img"
+						name="select_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_user_details_role_assignment}:" /></td>
+				<td><h:outputLabel styleClass="bold"
+						value="#{msg.lbl_user_details_available_roles}" /> <p:selectOneListbox
+						id="availableRoles"
+						label="#{msg.lbl_user_details_available_roles}"
+						converter="#{roleConverter}" styleClass="userListBox"
+						value="#{userDetails.selectedAvailableRole}">
+						<f:selectItems itemLabel="#{item.name}" itemValue="#{item}"
+							var="item" value="#{userDetails.availableRoles}" />
+					</p:selectOneListbox></td>
+				<td class="bold"><div style="width: 30px; margin-left: 50px;">
+						<p:commandButton actionListener="#{userDetails.unassignRole}"
+							styleClass="roleButtonPadding"
+							update="userDetails:availableRoles userDetails:assignedRoles"
+							icon="buttonArrowLeft" />
+						<p:commandButton actionListener="#{userDetails.assignRole}"
+							update="userDetails:availableRoles userDetails:assignedRoles"
+							icon="buttonArrowRight" />
+					</div></td>
+				<td><h:outputLabel styleClass="bold"
+						value="#{msg.lbl_user_details_assigned_roles}" /> <p:selectOneListbox
+						id="assignedRoles" converter="#{roleConverter}"
+						styleClass="userListBox"
+						value="#{userDetails.selectedAssignedRole}">
+						<f:selectItems itemLabel="#{item.name}" itemValue="#{item}"
+							var="item" value="#{userDetails.assignedRoles}" />
+					</p:selectOneListbox></td>
+			</tr>
+			<tr>
+				<td class="label"><h:graphicImage library="img"
+						name="about_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_user_details_about}:" /></td>
+			</tr>
+			<tr>
+				<td colspan="6"><p:editor value="#{edited.about}" /></td>
+			</tr>
+		</tbody>
+	</table>
+</ui:composition>
+</html>

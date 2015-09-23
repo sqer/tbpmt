@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:wc="http://googlecode.com/wickedcharts"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/masterTemplate.xhtml">
+	<ui:define name="header">
+		<h1>Dashboard</h1>
+	</ui:define>
+	<ui:define name="script">
+		<h:outputScript name="jsapi.js" library="js" />
+		<script type="text/javascript">
+        // Load the Visualization API and the piechart package.
+        google.load('visualization', '1.0', {
+            'packages' : [ 'corechart' ]
+        });
+         
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(drawChart);
+ 
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+            // Create the data table.        
+            var data = google.visualization.arrayToDataTable([
+                [ 'Resolution', 'Count of tickets' ],
+                #{dashboard.pieResolutionChartData}
+            ]);                
+ 
+            // Set chart options
+            var options = {
+                'title' : '#{dashboard.resolutionChartTitle}',
+                is3D : true,
+                pieSliceText : 'label',
+                tooltip : {
+                    showColorCode : true
+                },
+                'width' : 432,
+                'height' : 240
+            };
+ 
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document
+                    .getElementById('resolution_chart_div'));
+            chart.draw(data, options);
+            
+        }
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(drawChart2);
+ 
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart2() {
+            // Create the data table.        
+            var data = google.visualization.arrayToDataTable([
+                [ 'Type', 'Count of tickets' ],
+                #{dashboard.pieTypeChartData}
+            ]);                
+ 
+            // Set chart options
+            var options = {
+                'title' : '#{dashboard.typeChartTitle}',
+                is3D : true,
+                pieSliceText : 'label',
+                tooltip : {
+                    showColorCode : true
+                },
+                'width' : 432,
+                'height' : 240
+            };
+ 
+            // Instantiate and draw our chart, passing in some options.
+            var chart2 = new google.visualization.PieChart(document
+                    .getElementById('type_chart_div'));
+            chart2.draw(data, options);
+            
+        }
+    </script>
+	</ui:define>
+	<ui:define name="content">
+		<p:dashboard id="board" model="#{dashboard.model}">
+			<p:panel id="tasks" header="#{msg.lbl_dashboard_table_header}"
+				style="width:600px;" closable="true">
+				<ui:include src="/views/dashboard_table.xhtml"></ui:include>
+			</p:panel>
+			<p:panel id="resolutionChart" header="#{msg.lbl_dashboard_chart_header}"
+				closable="true">
+				<div>
+					<div id="resolution_chart_div"></div>
+				</div>
+				<div style="clear: both;" />
+			</p:panel>
+			<p:panel id="typeChart" header="#{msg.lbl_dashboard_chart_header}"
+				closable="true">
+				<div>
+					<div id="type_chart_div"></div>
+				</div>
+				<div style="clear: both;" />
+			</p:panel>
+		</p:dashboard>
+		<div style="clear: both;" />
+	</ui:define>
+</ui:composition>
+</html>

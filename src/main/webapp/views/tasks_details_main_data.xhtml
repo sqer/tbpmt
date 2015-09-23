@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tbpmt="http://java.sun.com/jsf/composite/tbpmt"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<table class="defaultTableLayout" cellspacing="0" cellpadding="10">
+		<tbody>
+			<tr>
+				<td class="label"><h:graphicImage library="img"
+						name="type_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_table_task_title}:" /></td>
+				<td colspan="5"><p:inputText id="title" styleClass="maxWidth"
+						required="true" requiredMessage="#{msg.lbl_field_required}"
+						value="#{edited.title}" /> <p:message for="title" /></td>
+			</tr>
+			<tr>
+				<td class="label"><h:graphicImage library="img"
+						name="type_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_details_type}:" /></td>
+				<td class="value"><p:selectOneMenu id="type"
+						styleClass="defaultSelectItem" converter="#{typeConverter}"
+						value="#{edited.type}">
+						<f:selectItems itemValue="#{type}" itemLabel="#{type.name}"
+							var="type" value="#{taskDetails.typeList}" />
+					</p:selectOneMenu></td>
+				<td class="label"><h:graphicImage library="img"
+						name="user_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_details_creator_user}:" /></td>
+				<td class="value"><h:outputText
+						value="#{edited.creator.username}" /></td>
+				<td class="label"><h:graphicImage library="img"
+						name="date_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_details_creation_date}:" /></td>
+				<td class="value"><tbpmt:dateOutputText
+						value="#{edited.creationDate}" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><p:message for="type" /></td>
+				<td colspan="4"></td>
+			</tr>
+			<tr>
+				<td class="label"><h:graphicImage library="img"
+						name="priority_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_details_priority}:" /></td>
+				<td class="value"><p:selectOneMenu id="priority"
+						styleClass="defaultSelectItem" converter="#{priorityConverter}"
+						value="#{edited.priority}">
+						<f:selectItems itemValue="#{priority}"
+							itemLabel="#{priority.name}" var="priority"
+							value="#{taskDetails.priorityList}" />
+					</p:selectOneMenu></td>
+				<td class="label"><h:graphicImage library="img"
+						name="user_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_details_active_user}:" /></td>
+				<td class="value"><p:autoComplete id="assignedUser"
+						converter="#{userConverter}" required="true"
+						requiredMessage="#{msg.lbl_field_required}"
+						value="#{edited.assignee}" forceSelection="true"
+						completeMethod="#{taskDetails.assignedUserCompleteText}"
+						var="user" itemLabel="#{user.username}" itemValue="#{user}" /> <p:message
+						for="assignedUser" /></td>
+				<td class="label"><h:graphicImage library="img"
+						name="date_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_details_update_date}:" /></td>
+				<td class="value"><tbpmt:dateOutputText
+						value="#{edited.lastUpdateDate}" /></td>
+			</tr>
+			<tr>
+				<td class="label"><h:graphicImage library="img"
+						name="resolution_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_details_resolution}:" /></td>
+				<td class="value"><h:outputText
+						value="#{edited.resolution.name}" /></td>
+			</tr>
+			<tr>
+				<td class="label"><h:graphicImage library="img"
+						name="descr_24.png" styleClass="labelImg" /> <h:outputLabel
+						value="#{msg.lbl_tasks_details_description}:" /></td>
+			</tr>
+			<tr>
+				<td colspan="6"><p:editor id="editor" widgetVar="editorWidget"
+						value="#{edited.description}" /></td>
+			</tr>
+			<tr>
+				<td colspan="6"><p:message for="editor" /></td>
+			</tr>
+		</tbody>
+	</table>
+</ui:composition>
+</html>
